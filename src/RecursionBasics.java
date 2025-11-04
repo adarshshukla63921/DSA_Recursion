@@ -31,8 +31,49 @@ public class RecursionBasics {
         if(s.charAt(start)!=s.charAt(end)) return false;
         return checkPalindromeHelper(s,start+1,end-1);
      }
+
+
+    public static boolean checkPrimeNumberHelper(int num, int i){
+        if (num <= 2)
+            return (num == 2);
+        if (num % i == 0)
+            return false;
+        if (i * i > num)
+            return true;
+        return checkPrimeNumberHelper(num, i + 1);
+    }
+    public static boolean checkPrimeNumber(int num){
+        return checkPrimeNumberHelper(num,2);
+    }
+
+    public static void reverseArrayHelper(int[] arr, int start, int end){
+        if(start>end) return;
+        int temp = arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+        reverseArrayHelper(arr,start+1,end-1);
+    }
+    public static void reverseArray(int[] arr){
+        reverseArrayHelper(arr,0,arr.length-1);
+    }
+    public static boolean checkSortedHelper(int[] arr, int i, int n){
+        if(!(arr[i-1]<=arr[i])) return false;
+        if(i==n) return true;
+        i=i+1;
+        return checkSortedHelper(arr,i,n);
+    }
+    public static boolean checkSorted(int[] arr){
+        return checkSortedHelper(arr,1,arr.length-1);
+    }
+
     public static void main(String[] args) {
-       String str ="ab";
-       System.out.println(checkPalindrome(str));
+       int[] arr = {1,2,3,4,5};
+       System.out.println(checkSorted(arr));
+       reverseArray(arr);
+       for(int num : arr){
+           System.out.print(num+" ");
+       }
+       System.out.println();
+       System.out.println(checkSorted(arr));
     }
 }
